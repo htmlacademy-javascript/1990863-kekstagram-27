@@ -3,18 +3,12 @@ function getRandomInt(min, max) {
   if(min >= 0 && max >= 0) {
     return Math.round(Math.random() * (max - min) + min);
   }
-  return 'NaN';
+  return NaN;
 }
-console.log(getRandomInt(1, 10));
-
-
-
+getRandomInt(1, 10);
 //Функция для проверки максимальной длины строки
-function checkLenght(testString, maxLenght) {
-  if(testString.length <= maxLenght) {
-    return true;
-  }
-  return false;
+function checkLength(testString, maxLenght) {
+  return testString.length <= maxLenght;
 }
-console.log(checkLenght('Первая домашка', 20));
-console.log(checkLenght('Раз, два', 5));
+checkLength('Первая домашка', 20);
+checkLength('Раз, два', 5);
