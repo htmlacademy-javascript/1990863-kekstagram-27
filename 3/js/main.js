@@ -55,10 +55,6 @@ function getRandomPositiveInteger(a, b) {
 }
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-let i = 0;
-const idCount = () => { return ++i};
-let idComment = 0;
-const getIdComent = () => {return ++idComment;};
 const getRandomMessage = (a = 1, b = 2) => {
   let numMessage = getRandomPositiveInteger(a, b);
   let listMessage = [];
@@ -72,39 +68,43 @@ const getRandomMessage = (a = 1, b = 2) => {
   }
   return listMessage.join(' ');
 };
-const comment = () => ({
-  id: getIdComent(),
+
+const generateId = () => {
+  let currentId = 0;
+  return function() {
+    currentId++;
+    return currentId;
+  };
+};
+
+let idComment = generateId();
+const generateComment = () => ({
+  id: idComment(),
   avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
   message: getRandomMessage(),
   name: getRandomArrayElement(NAMES),
 });
 
-const generateComment = (a = 1, b = 4) => {
+const addComment = (a = 1, b = 4) => {
   const comments = [];
   for(let j = 1; j <= getRandomPositiveInteger(a,b); j++) {
-    comments.push(comment());
+    comments.push(generateComment());
   }
+
   return comments;
 };
-let randomNums = [];
-const generateId = (a = 1, b = PHOTO_DESCRIPTION_COUNT) => {
-  let id = getRandomPositiveInteger(a,b);
-  if(!(randomNums.find(item => item === id))) {
-    randomNums.push(id);
-    return(id);
-  } return generateId();
-};
 
+let id = generateId();
 const createPhotoDescription = () => {
-  let idPhoto = generateId();
   return {
-    id: idPhoto,
-    url: `photos/${idPhoto}.jpg`,
-    description: DESCRIPTION[idPhoto - 1],
+    id: id(),
+    url: `photos/${id}.jpg`,
+    description: DESCRIPTION[id - 1],
     likes: getRandomPositiveInteger(15, 200),
-    comments: generateComment(),
+    comments: addComment(),
   }
 };
+
 const similarPhotoDescription = Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
 console.log(similarPhotoDescription);
 
