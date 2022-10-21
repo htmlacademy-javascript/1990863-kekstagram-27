@@ -15,13 +15,13 @@ const getRandomMessage = (a = 1, b = 2) => {
   return listMessage.join(' ');
 };
 
-let idComment = generateId();
+const idComment = generateId();
 const generateComment = () => {
   return {
-  id: idComment(),
-  avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
-  message: getRandomMessage(),
-  name: getRandomArrayElement(NAMES),
+    id: idComment(),
+    avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+    message: getRandomMessage(),
+    name: getRandomArrayElement(NAMES),
 }};
 
 const addComment = (a = 1, b = 4) => {

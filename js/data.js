@@ -48,15 +48,15 @@ const NAMES = [
 ];
 const PHOTO_DESCRIPTION_COUNT = 25;
 
-let id = generateId();
+const id = generateId();
 const createPhotoDescription = () => {
   const photoId = id();
   return {
-  id: photoId,
-  url: `photos/${photoId}.jpg`,
-  description: DESCRIPTION[photoId - 1],
-  likes: getRandomPositiveInteger(15, 200),
-  comments: addComment(),
+    id: photoId,
+    url: `photos/${photoId}.jpg`,
+    description: DESCRIPTION[photoId - 1],
+    likes: getRandomPositiveInteger(15, 200),
+    comments: addComment(),
 }};
 
 const similarPhotoDescription = () => Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
