@@ -7,7 +7,7 @@ const getRandomMessage = (a = 1, b = 2) => {
   let j = 1;
   while( j <= numMessage) {
     const message = getRandomArrayElement(MESSAGES);
-    if(!(listMessage.find(item => item === message))) {
+    if(!(listMessage.includes(message))) {
       listMessage.push(message);
       j++;
     }
@@ -16,13 +16,12 @@ const getRandomMessage = (a = 1, b = 2) => {
 };
 
 const idComment = generateId();
-const generateComment = () => {
-  return {
-    id: idComment(),
-    avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
-    message: getRandomMessage(),
-    name: getRandomArrayElement(NAMES),
-}};
+const generateComment = () => ({
+  id: idComment(),
+  avatar: `img/avatar-${getRandomPositiveInteger(1, 6)}.svg`,
+  message: getRandomMessage(),
+  name: getRandomArrayElement(NAMES),
+});
 
 const addComment = (a = 1, b = 4) => {
   const comments = [];
