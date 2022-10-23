@@ -1,4 +1,4 @@
-import {generateId, getRandomPositiveInteger, getRandomArrayElement} from './util.js';
+import {generateId, getRandomPositiveInteger} from './util.js';
 import {addComment} from './comment.js';
 
 const DESCRIPTION = [
@@ -57,7 +57,8 @@ const createPhotoDescription = () => {
     description: DESCRIPTION[photoId - 1],
     likes: getRandomPositiveInteger(15, 200),
     comments: addComment(),
-}};
+  };
+};
 
 const similarPhotoDescription = () => Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
 
