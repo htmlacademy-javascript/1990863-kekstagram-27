@@ -1,3 +1,3 @@
-import {similarPhotoDescription} from './data.js';
-similarPhotoDescription();
-//console.log(similarPhotoDescription());
+import './picture.js';
+
+
