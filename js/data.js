@@ -6,7 +6,7 @@ const DESCRIPTION = [
   'Все на пляж!',
   'Лагуна',
   'Отличный загар',
-  'Забаный обед',
+  'Забавный обед',
   'Bat-мобиль',
   'Клубничка',
   'Морс',
@@ -60,6 +60,6 @@ const createPhotoDescription = () => {
   };
 };
 
-const similarPhotoDescription = () => Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
+const createSimilarPhoto = () => Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
 
-export {similarPhotoDescription , MESSAGES, NAMES};
+export {createSimilarPhoto , MESSAGES, NAMES};
