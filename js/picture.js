@@ -16,4 +16,5 @@ similarPicture.forEach(({url, description, likes, comments}) => {
 });
 
 similarListPictures.appendChild(similarListFragment);
+
 openBigPicture(similarListPictures, similarPicture);
