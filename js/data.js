@@ -60,6 +60,6 @@ const createPhotoDescription = () => {
   };
 };
 
-const similarPhotoDescription = () => Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
+const createSimilarPhoto = () => Array.from({length: PHOTO_DESCRIPTION_COUNT}, createPhotoDescription);
 
-export {similarPhotoDescription , MESSAGES, NAMES};
+export {createSimilarPhoto , MESSAGES, NAMES};

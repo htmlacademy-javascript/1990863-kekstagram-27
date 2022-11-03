@@ -9,6 +9,10 @@ const getRandomMessage = (a = 1, b = 2) => {
     const message = getRandomArrayElement(MESSAGES);
     if(!(listMessage.includes(message))) {
       listMessage.push(message);
+      const messageText = listMessage.join(' ');
+      if(messageText.length > 140 ){
+        listMessage.pop();
+      }
       j++;
     }
   }
