@@ -1,5 +1,5 @@
 import {createSimilarPhoto} from './data.js';
-import {openBigPicture} from './big-picture.js';
+
 const similarListPictures = document.querySelector('.pictures');
 const similarPictureTemplate = document.querySelector('#picture')
   .content
@@ -16,4 +16,4 @@ similarPicture.forEach(({url, description, likes, comments}) => {
 });
 
 similarListPictures.appendChild(similarListFragment);
-openBigPicture(similarListPictures, similarPicture);
+
