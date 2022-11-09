@@ -20,8 +20,8 @@ const changeScale = (evt) => {
     }else if (evt.target === biggerScale) {
       scale = biggerScaleImg(scale);
     }
-    downloadedImg.style.transform = 'scale(' + scale / 100 + ')';
-    valueScale.value = scale + '%';
+    downloadedImg.style.transform = `scale(${scale / 100})`;
+    valueScale.value = `${scale}%`;
 
   }
 };
@@ -44,15 +44,8 @@ const listEffects = document.querySelector('.effects__list');
 const effectsItem = listEffects.querySelectorAll('.effects__item');
 const radioEffect = '.effects__radio';
 const effectPreview = 'effects__preview--';
-const effectStandart = effectPreview + 'none';
-const sliderEffect = {
-  none: 'filter удаляются.',
-  chrome: 'grayscale(0..1) с шагом 0.1;',
-  sepia: 'sepia(0..1) с шагом 0.1;',
-  marvin: 'invert(0..100%) с шагом 1%;',
-  phobos: 'blur(0..3px) с шагом 0.1px;',
-  heat: 'brightness(1..3) с шагом 0.1;',
-};
+const effectStandart = `${effectPreview}none`;
+//const sliderEffect = {  none: 'filter удаляются.',  chrome: 'grayscale(0..1) с шагом 0.1;',  sepia: 'sepia(0..1) с шагом 0.1;',  marvin: 'invert(0..100%) с шагом 1%;',  phobos: 'blur(0..3px) с шагом 0.1px;',  heat: 'brightness(1..3) с шагом 0.1;',};
 const setEffect = (evt) => {
   const effectTargetItem = evt.target.closest('.effects__item');
   if(effectTargetItem) {
@@ -74,7 +67,7 @@ const hashtags = document.querySelector('.text__hashtags');
 const ourComment = document.querySelector('.text__description');
 
 const standartImg = () =>{
-  valueScale.value = 100 + '%';
+  valueScale.value = `${100}%`;
   downloadedImg.style.transform = 'scale(1)';
   downloadedImg.className = '';
   downloadedImg.classList.add(effectStandart);
