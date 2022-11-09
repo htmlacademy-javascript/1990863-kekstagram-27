@@ -17,4 +17,7 @@ function getRandomPositiveInteger(a, b) {
 }
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-export {generateId, getRandomPositiveInteger, getRandomArrayElement};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+export {generateId, getRandomPositiveInteger, getRandomArrayElement, isEscapeKey, isEnterKey};
