@@ -1,8 +1,6 @@
 const MIN_HASHTAG_LENGTH = 2;
-const MAX_HASHTAG_LENGTH = 20;
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAGS = 5;
-const UNIC_HASHTAG = 1;
 
 const imageForm = document.querySelector('#upload-select-image');
 const inputHashtag = imageForm.querySelector('.text__hashtags');
@@ -19,40 +17,30 @@ const pristine = new Pristine(imageForm, {
 
 const regHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 
-const validHashtag = (array) => {
-  let result;
-  array = array.filter( (item) => (
-    (item !== '')
-  ));
-  if(array.length <= MAX_HASHTAGS) {
-    const repetition = {};
-    array.forEach( (item) => {
-      if(item){
-        repetition[item.toLowerCase()] = (repetition[item.toLowerCase()] || 0) + 1;
-      }
-    });
-    for (const key in repetition) {
-      if (repetition[key] <= UNIC_HASHTAG && regHashtag.test(key) && key.length <= MAX_HASHTAG_LENGTH && key.length >= MIN_HASHTAG_LENGTH) {
-        result = array;
-      } else{
-        result = false;
-        break;
-      }
-    }
-  }
-  return result;
+const validateHashtag = (hashtagArray) => {
+  const hashtags = hashtagArray.filter(
+    (item) => ((item !== ''))
+  ).map(
+    (item) => (item.toLowerCase())
+  );
+  const uniqTags = new Set(hashtags);
+  const numberHashtags = hashtags.length;
+  const isAllTagsUnique = uniqTags.size === numberHashtags;
+  const isAllTagsValid = hashtags.every((tag) => regHashtag.test(tag));
+
+  return (numberHashtags <= MAX_HASHTAGS) && isAllTagsUnique && isAllTagsValid;
 };
 
-function validateHashtag (value) {
+function isHashtagValidate (value) {
   if(value !== '') {
     const hashtagList = value.split(' ');
-    return (validHashtag(hashtagList) && value.length >= MIN_HASHTAG_LENGTH);
+    return (validateHashtag(hashtagList) && value.length >= MIN_HASHTAG_LENGTH);
   } return true;
 }
 
 pristine.addValidator(
   inputHashtag,
-  validateHashtag,
+  isHashtagValidate,
   `Хештеги должны начинаться с символа # и от ${MIN_HASHTAG_LENGTH - 1} символа, должны быть уникальны, написаны через пробел и не более 5 хештегов`
 );
 

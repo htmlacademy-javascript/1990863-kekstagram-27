@@ -2,9 +2,9 @@
 //применение одного из заранее заготовленных эффектов;
 //выбор глубины эффекта с помощью ползунка;
 
-const step = 25;
-const min = 25;
-const max = 100;
+const STEP_SCALE = 25;
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
 const scalePanel = document.querySelector('.scale');
 const smallerScale = document.querySelector('.scale__control--smaller');
 const biggerScale = document.querySelector('.scale__control--bigger');
@@ -27,14 +27,16 @@ const changeScale = (evt) => {
 };
 
 function smallerScaleImg(scale) {
-  if(+scale - step >= min) {
-    return (scale -= step);
+  const reduceScale = scale - STEP_SCALE;
+  if(reduceScale >= MIN_SCALE) {
+    return (reduceScale);
   } return scale;
 }
 
 function biggerScaleImg(scale) {
-  if(+scale + +step <= max) {
-    return (scale += +step);
+  const increaseScale = Number(scale) + Number(STEP_SCALE);
+  if(increaseScale <= MAX_SCALE) {
+    return (increaseScale);
   } return scale;
 }
 
