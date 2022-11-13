@@ -27,7 +27,7 @@ const generateComment = () => ({
   name: getRandomArrayElement(NAMES),
 });
 
-const addComment = (a = 1, b = 4) => {
+const addComment = (a = 1, b = 10) => {
   const comments = [];
   for(let j = 1; j <= getRandomPositiveInteger(a,b); j++) {
     comments.push(generateComment());
