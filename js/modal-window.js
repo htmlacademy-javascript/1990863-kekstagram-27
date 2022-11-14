@@ -27,6 +27,14 @@ function ModalWindow(popupWindow) {
       document.addEventListener('keydown', onPopupEscKeydown);
     };
   };
+
+  this.onEscDeleteEvent = function(callback, fromWindow, thisFunction) {
+    document.addEventListener('keydown', (evt) => {
+      if (isEscapeKey(evt)) {
+        fromWindow.removeEventListener(callback, thisFunction);
+      }
+    });
+  };
 }
 
 
