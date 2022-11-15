@@ -52,7 +52,7 @@ const openBigPicture = (pictures, fullInfoPictures) => {
       bigPictureImg.alt = description;
       bigPicture.querySelector('.likes-count').textContent = likes;
       //если все комментарии показаны
-      const ifRestOfComment = () => {
+      const checkRestOfComment = () => {
         const commentsCount = document.createElement('span');
         commentsCount.classList.add('comments-count');
         const lenghtComments = document.querySelectorAll('.social__comment').length;
@@ -77,7 +77,7 @@ const openBigPicture = (pictures, fullInfoPictures) => {
           createComment(avatar, message, name);
         }
       }
-      ifRestOfComment();
+      checkRestOfComment();
       const nubmerComments = countNubmerComment();
       //показать следующие комменатрии
       const createNextComments = () => {
@@ -94,14 +94,14 @@ const openBigPicture = (pictures, fullInfoPictures) => {
           }
         };
 
-        if(restOfComment >= 5 && restOfComment <= comments.length) {
+        if(restOfComment >= NUMBER_OF_COMMENT && restOfComment <= comments.length) {
           getNextComment(nextNumberComment);
         }
-        else if (restOfComment > 0 && restOfComment < 5) {
+        else if (restOfComment > 0 && restOfComment < NUMBER_OF_COMMENT) {
           const restIndex = restOfComment + currentNubmerComments;
           getNextComment(restIndex);
         }
-        ifRestOfComment();
+        checkRestOfComment();
       };
       commentsLoader.addEventListener('click', createNextComments);
 

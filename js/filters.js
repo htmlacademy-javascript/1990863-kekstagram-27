@@ -22,7 +22,6 @@ const changeScale = (evt) => {
     }
     downloadedImg.style.transform = `scale(${scale / 100})`;
     valueScale.value = `${scale}%`;
-
   }
 };
 
@@ -47,7 +46,10 @@ const effectsItem = listEffects.querySelectorAll('.effects__item');
 const radioEffect = '.effects__radio';
 const effectPreview = 'effects__preview--';
 const effectStandart = `${effectPreview}none`;
-//const sliderEffect = {  none: 'filter удаляются.',  chrome: 'grayscale(0..1) с шагом 0.1;',  sepia: 'sepia(0..1) с шагом 0.1;',  marvin: 'invert(0..100%) с шагом 1%;',  phobos: 'blur(0..3px) с шагом 0.1px;',  heat: 'brightness(1..3) с шагом 0.1;',};
+
+const sliderElement = document.querySelector('.effect-level__slider');
+const slidervalue = document.querySelector('.effect-level__value');
+
 const setEffect = (evt) => {
   const effectTargetItem = evt.target.closest('.effects__item');
   if(effectTargetItem) {
@@ -58,12 +60,107 @@ const setEffect = (evt) => {
     const effectTarget = effectTargetItem.querySelector(radioEffect).value;
     downloadedImg.className = '';
     downloadedImg.classList.add(effectPreview + effectTarget);
-
-
+    if(effectTarget === 'none'){
+      sliderElement.classList.add('hidden');
+      downloadedImg.style.filter = '';
+    } else {
+      sliderElement.classList.remove('hidden');
+      changeSlider(evt, effectTarget);
+    }
   }
 };
 
-listEffects.addEventListener('click', setEffect);
+
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 1,
+  },
+  start: 1,
+  step: 0.1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
+//const sliderEffect = {  none: 'filter удаляются.',  chrome: 'grayscale(0..1) с шагом 0.1;',  sepia: 'sepia(0..1) с шагом 0.1;',  marvin: 'invert(0..100%) с шагом 1%;',  phobos: 'blur(0..3px) с шагом 0.1px;',  heat: 'brightness(1..3) с шагом 0.1;',};
+
+const changeFilter = (currentFilter, setValue, valueType) => {
+  downloadedImg.style.filter = `${currentFilter}(${setValue + valueType})`;
+};
+
+function changeSlider(evt, valueEffect) {
+  let currentFilter = '';
+  let valueType;
+  if (valueEffect === 'chrome' || valueEffect === 'sepia') {
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 1,
+      },
+      step: 0.1,
+    });
+    sliderElement.noUiSlider.set(1);
+    if(valueEffect === 'chrome'){
+      currentFilter = 'grayscale';
+    } else if (valueEffect === 'sepia') {
+      currentFilter = 'sepia';
+    }
+    valueType = '';
+  } else if(valueEffect === 'marvin') {
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 100,
+      },
+      step: 1,
+    });
+    sliderElement.noUiSlider.set(100);
+    currentFilter = 'invert';
+    valueType = '%';
+  } else if (valueEffect === 'phobos') {
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: 0,
+        max: 3,
+      },
+      step: 0.1,
+    });
+    sliderElement.noUiSlider.set(3);
+    currentFilter = 'blur';
+    valueType = 'px';
+  } else if (valueEffect === 'heat') {
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: 1,
+        max: 3,
+      },
+      step: 0.1,
+    });
+    sliderElement.noUiSlider.set(3);
+    currentFilter = 'brightness';
+    valueType = '';
+  } else {
+    currentFilter = '';
+    valueType = '';
+  }
+
+  sliderElement.noUiSlider.on('update', () => {
+    const valueSlider = sliderElement.noUiSlider.get();
+    slidervalue.value = valueSlider;
+    changeFilter(currentFilter, valueSlider, valueType);
+  });
+}
+
+listEffects.addEventListener('change', setEffect);
 
 const hashtags = document.querySelector('.text__hashtags');
 const ourComment = document.querySelector('.text__description');
@@ -73,8 +170,10 @@ const standartImg = () =>{
   downloadedImg.style.transform = 'scale(1)';
   downloadedImg.className = '';
   downloadedImg.classList.add(effectStandart);
+  downloadedImg.style.filter = '';
   document.querySelector('#effect-none').checked = true;
   hashtags.value = '';
   ourComment.value = '';
+  sliderElement.classList.add('hidden');
 };
 export {standartImg};
