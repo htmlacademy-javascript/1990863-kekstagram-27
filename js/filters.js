@@ -63,6 +63,7 @@ const setEffect = (evt) => {
     if(effectTarget === 'none'){
       sliderElement.classList.add('hidden');
       downloadedImg.style.filter = '';
+      slidervalue.value = '';
     } else {
       sliderElement.classList.remove('hidden');
       changeSlider(evt, effectTarget);
@@ -172,6 +173,7 @@ const standartImg = () =>{
   downloadedImg.classList.add(effectStandart);
   downloadedImg.style.filter = '';
   document.querySelector('#effect-none').checked = true;
+  slidervalue.value = '';
   hashtags.value = '';
   ourComment.value = '';
   sliderElement.classList.add('hidden');

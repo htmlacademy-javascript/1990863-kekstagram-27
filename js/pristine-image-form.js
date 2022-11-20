@@ -1,4 +1,5 @@
 import {showAlertError, showAlertSuccess} from './util.js';
+import {standartImg} from'./filters.js';
 
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_COMMENT_LENGTH = 140;
@@ -81,6 +82,7 @@ const setUserFormSubmit = (onSuccess) => {
           if (response.ok) {
             onSuccess();
             showAlertSuccess('Форма успешно отправлена');
+            standartImg();
           } else {
             showAlertError('Не удалось отправить форму. Попробуйте ещё раз');
           }
@@ -88,6 +90,8 @@ const setUserFormSubmit = (onSuccess) => {
         .catch(() => {
           showAlertError('Не удалось отправить форму. Попробуйте ещё раз');
         });
+    } else {
+      showAlertError('Введите данные по форме');
     }
   });
 };
