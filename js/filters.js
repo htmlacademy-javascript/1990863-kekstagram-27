@@ -9,6 +9,7 @@ const scalePanel = document.querySelector('.scale');
 const smallerScale = document.querySelector('.scale__control--smaller');
 const biggerScale = document.querySelector('.scale__control--bigger');
 const valueScale = document.querySelector('.scale__control--value');
+const uploadFile = document.querySelector('#upload-file');
 const downloadedImg = document.querySelector('.img-upload__preview img');
 
 const changeScale = (evt) => {
@@ -176,6 +177,7 @@ const standartImg = () =>{
   slidervalue.value = '';
   hashtags.value = '';
   ourComment.value = '';
+  uploadFile.value = '';
   sliderElement.classList.add('hidden');
 };
 export {standartImg};
