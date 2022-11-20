@@ -9,6 +9,7 @@ const scalePanel = document.querySelector('.scale');
 const smallerScale = document.querySelector('.scale__control--smaller');
 const biggerScale = document.querySelector('.scale__control--bigger');
 const valueScale = document.querySelector('.scale__control--value');
+const uploadFile = document.querySelector('#upload-file');
 const downloadedImg = document.querySelector('.img-upload__preview img');
 
 const changeScale = (evt) => {
@@ -63,6 +64,7 @@ const setEffect = (evt) => {
     if(effectTarget === 'none'){
       sliderElement.classList.add('hidden');
       downloadedImg.style.filter = '';
+      slidervalue.value = '';
     } else {
       sliderElement.classList.remove('hidden');
       changeSlider(evt, effectTarget);
@@ -172,8 +174,10 @@ const standartImg = () =>{
   downloadedImg.classList.add(effectStandart);
   downloadedImg.style.filter = '';
   document.querySelector('#effect-none').checked = true;
+  slidervalue.value = '';
   hashtags.value = '';
   ourComment.value = '';
+  uploadFile.value = '';
   sliderElement.classList.add('hidden');
 };
 export {standartImg};
