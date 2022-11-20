@@ -17,3 +17,4 @@ cancelForm.addEventListener('click', () => {
 
 modalDownloadWindow.removeEsc(inputHashtag);
 modalDownloadWindow.removeEsc(inputDescription);
+export {modalDownloadWindow};

@@ -1,3 +1,5 @@
+import {showAlertError, showAlertSuccess} from './util.js';
+
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAGS = 5;
@@ -59,10 +61,34 @@ pristine.addValidator(
   validateDescription,
   `Комментарий не должен содержать более ${MAX_COMMENT_LENGTH} символов`
 );
+const setUserFormSubmit = (onSuccess) => {
+  imageForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    //pristine.validate();
 
-imageForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  pristine.validate();
-});
+    const isValid = pristine.validate();
+    if (isValid) {
+      const formData = new FormData(evt.target);
 
-export {inputHashtag, inputDescription };
+      fetch(
+        'https://27.javascript.pages.academy/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      )
+        .then((response) => {
+          if (response.ok) {
+            onSuccess();
+            showAlertSuccess('Форма успешно отправлена');
+          } else {
+            showAlertError('Не удалось отправить форму. Попробуйте ещё раз');
+          }
+        })
+        .catch(() => {
+          showAlertError('Не удалось отправить форму. Попробуйте ещё раз');
+        });
+    }
+  });
+};
+export {inputHashtag, inputDescription, setUserFormSubmit};
