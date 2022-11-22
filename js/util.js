@@ -56,5 +56,12 @@ const showAlertError = (message) => {
   alertError.style.backgroundColor = 'red';
   showAlertContainer(message, alertError);
 };
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
 
-export {generateId, getRandomPositiveInteger, getRandomArrayElement, isEscapeKey, isEnterKey, showAlertSuccess, showAlertError};
+export {generateId, getRandomPositiveInteger, getRandomArrayElement, isEscapeKey, isEnterKey, showAlertSuccess, showAlertError, debounce};

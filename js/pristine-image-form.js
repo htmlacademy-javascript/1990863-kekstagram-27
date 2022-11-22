@@ -1,5 +1,7 @@
 import {showAlertError, showAlertSuccess} from './util.js';
-import {standartImg} from'./filters.js';
+import {standartImg} from'./filters-for-upload-image.js';
+import {API_URL} from './api-data.js';
+import {showImgFilters} from './global-filters.js';
 
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_COMMENT_LENGTH = 140;
@@ -72,7 +74,7 @@ const setUserFormSubmit = (onSuccess) => {
       const formData = new FormData(evt.target);
 
       fetch(
-        'https://27.javascript.pages.academy/kekstagram',
+        API_URL,
         {
           method: 'POST',
           body: formData,
@@ -83,6 +85,7 @@ const setUserFormSubmit = (onSuccess) => {
             onSuccess();
             showAlertSuccess('Форма успешно отправлена');
             standartImg();
+            showImgFilters();
           } else {
             showAlertError('Не удалось отправить форму. Попробуйте ещё раз');
           }

@@ -1,7 +1,7 @@
 import {generateId, getRandomPositiveInteger} from './util.js';
 import {addComment} from './comment.js';
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Искусственный водоем',
   'Все на пляж!',
   'Лагуна',
@@ -54,7 +54,7 @@ const createPhotoDescription = () => {
   return {
     id: photoId,
     url: `photos/${photoId}.jpg`,
-    description: DESCRIPTION[photoId - 1],
+    description: DESCRIPTIONS[photoId - 1],
     likes: getRandomPositiveInteger(15, 200),
     comments: addComment(),
   };
