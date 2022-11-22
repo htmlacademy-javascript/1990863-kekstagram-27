@@ -3,20 +3,20 @@ import { MESSAGES, NAMES } from './data.js';
 
 const getRandomMessage = (a = 1, b = 2) => {
   const numMessage = getRandomPositiveInteger(a, b);
-  const listMessage = [];
+  const listMessages = [];
   let j = 1;
   while( j <= numMessage) {
     const message = getRandomArrayElement(MESSAGES);
-    if(!(listMessage.includes(message))) {
-      listMessage.push(message);
-      const messageText = listMessage.join(' ');
+    if(!(listMessages.includes(message))) {
+      listMessages.push(message);
+      const messageText = listMessages.join(' ');
       if(messageText.length > 140 ){
-        listMessage.pop();
+        listMessages.pop();
       }
       j++;
     }
   }
-  return listMessage.join(' ');
+  return listMessages.join(' ');
 };
 
 const idComment = generateId();

@@ -1,6 +1,4 @@
-//изменение масштаба изображения;
-//применение одного из заранее заготовленных эффектов;
-//выбор глубины эффекта с помощью ползунка;
+const DEFAULT_IMAGE = 'img/upload-default-image.jpg';
 
 const STEP_SCALE = 25;
 const MIN_SCALE = 25;
@@ -10,7 +8,7 @@ const smallerScale = document.querySelector('.scale__control--smaller');
 const biggerScale = document.querySelector('.scale__control--bigger');
 const valueScale = document.querySelector('.scale__control--value');
 const uploadFile = document.querySelector('#upload-file');
-const downloadedImg = document.querySelector('.img-upload__preview img');
+const loadedImg = document.querySelector('.img-upload__preview img');
 
 const changeScale = (evt) => {
   if(evt.target === smallerScale || evt.target === biggerScale) {
@@ -21,7 +19,7 @@ const changeScale = (evt) => {
     }else if (evt.target === biggerScale) {
       scale = biggerScaleImg(scale);
     }
-    downloadedImg.style.transform = `scale(${scale / 100})`;
+    loadedImg.style.transform = `scale(${scale / 100})`;
     valueScale.value = `${scale}%`;
   }
 };
@@ -59,11 +57,11 @@ const setEffect = (evt) => {
     });
     effectTargetItem.querySelector(radioEffect).checked = true;
     const effectTarget = effectTargetItem.querySelector(radioEffect).value;
-    downloadedImg.className = '';
-    downloadedImg.classList.add(effectPreview + effectTarget);
+    loadedImg.className = '';
+    loadedImg.classList.add(effectPreview + effectTarget);
     if(effectTarget === 'none'){
       sliderElement.classList.add('hidden');
-      downloadedImg.style.filter = '';
+      loadedImg.style.filter = '';
       slidervalue.value = '';
     } else {
       sliderElement.classList.remove('hidden');
@@ -93,10 +91,9 @@ noUiSlider.create(sliderElement, {
     },
   },
 });
-//const sliderEffect = {  none: 'filter удаляются.',  chrome: 'grayscale(0..1) с шагом 0.1;',  sepia: 'sepia(0..1) с шагом 0.1;',  marvin: 'invert(0..100%) с шагом 1%;',  phobos: 'blur(0..3px) с шагом 0.1px;',  heat: 'brightness(1..3) с шагом 0.1;',};
 
 const changeFilter = (currentFilter, setValue, valueType) => {
-  downloadedImg.style.filter = `${currentFilter}(${setValue + valueType})`;
+  loadedImg.style.filter = `${currentFilter}(${setValue + valueType})`;
 };
 
 function changeSlider(evt, valueEffect) {
@@ -167,17 +164,20 @@ listEffects.addEventListener('change', setEffect);
 const hashtags = document.querySelector('.text__hashtags');
 const ourComment = document.querySelector('.text__description');
 
-const standartImg = () =>{
+const clearForm = () => {
+  loadedImg.src = DEFAULT_IMAGE;
+  uploadFile.value = '';
+};
+const standartImg = () => {
   valueScale.value = `${100}%`;
-  downloadedImg.style.transform = 'scale(1)';
-  downloadedImg.className = '';
-  downloadedImg.classList.add(effectStandart);
-  downloadedImg.style.filter = '';
+  loadedImg.style.transform = 'scale(1)';
+  loadedImg.className = '';
+  loadedImg.classList.add(effectStandart);
+  loadedImg.style.filter = '';
   document.querySelector('#effect-none').checked = true;
   slidervalue.value = '';
   hashtags.value = '';
   ourComment.value = '';
-  uploadFile.value = '';
   sliderElement.classList.add('hidden');
 };
-export {standartImg};
+export {standartImg, clearForm};

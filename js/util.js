@@ -22,39 +22,32 @@ const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0,
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
-const alertContainer = () => {
-  const container = document.createElement('div');
-  container.style.zIndex = '100';
-  container.style.position = 'absolute';
-  container.style.left = '0';
-  container.style.top = '0';
-  container.style.right = '0';
-  container.style.padding = '10px 3px';
-  container.style.fontSize = '22px';
-  container.style.textAlign = 'center';
-
-  return container;
-};
-
-const showAlertContainer = (message, currentWindow) => {
-  currentWindow.textContent = message;
-
-  document.body.append(currentWindow);
-
+const showAlert = (message) => {
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = '100';
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = '0';
+  alertContainer.style.top = '0';
+  alertContainer.style.right = '0';
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '25px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+  alertContainer.textContent = message;
+  document.body.append(alertContainer);
   setTimeout(() => {
-    currentWindow.remove();
+    alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
 
-const showAlertSuccess = (message) => {
-  const alertSuccess = alertContainer();
-  alertSuccess.style.backgroundColor = 'green';
-  showAlertContainer(message, alertSuccess);
-};
-const showAlertError = (message) => {
-  const alertError = alertContainer();
-  alertError.style.backgroundColor = 'red';
-  showAlertContainer(message, alertError);
+
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
 };
 
-export {generateId, getRandomPositiveInteger, getRandomArrayElement, isEscapeKey, isEnterKey, showAlertSuccess, showAlertError};
+export {generateId, getRandomPositiveInteger, getRandomArrayElement, isEscapeKey, isEnterKey, showAlert, debounce};
+

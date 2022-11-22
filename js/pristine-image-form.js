@@ -1,5 +1,7 @@
-import {showAlertError, showAlertSuccess} from './util.js';
-import {standartImg} from'./filters.js';
+import {showSuccessMessage, showErrorMessage} from './upload-messages.js';
+import {standartImg, clearForm} from'./filter.js';
+import {API_URL} from './api-data.js';
+
 
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_COMMENT_LENGTH = 140;
@@ -65,14 +67,13 @@ pristine.addValidator(
 const setUserFormSubmit = (onSuccess) => {
   imageForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    //pristine.validate();
 
     const isValid = pristine.validate();
     if (isValid) {
       const formData = new FormData(evt.target);
 
       fetch(
-        'https://27.javascript.pages.academy/kekstagram',
+        API_URL,
         {
           method: 'POST',
           body: formData,
@@ -81,17 +82,18 @@ const setUserFormSubmit = (onSuccess) => {
         .then((response) => {
           if (response.ok) {
             onSuccess();
-            showAlertSuccess('Форма успешно отправлена');
+            showSuccessMessage();
             standartImg();
+            clearForm();
           } else {
-            showAlertError('Не удалось отправить форму. Попробуйте ещё раз');
+            showErrorMessage();
           }
         })
         .catch(() => {
-          showAlertError('Не удалось отправить форму. Попробуйте ещё раз');
+          showErrorMessage();
         });
     } else {
-      showAlertError('Введите данные по форме');
+      showErrorMessage();
     }
   });
 };
