@@ -66,7 +66,7 @@ const renderSimilarPhotos = debounce((similarPicture) => {
   similarListPictures.appendChild(similarListFragment);
   openBigPicture(similarListPictures, similarPicture);
 
-  document.querySelectorAll('.picture').forEach((picture) => {picture.remove()});
+  document.querySelectorAll('.picture').forEach((picture) => {picture.remove();});
   similarListPictures.appendChild(similarListFragment);
   openBigPicture(similarListPictures, similarPicture);
 
