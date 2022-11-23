@@ -1,13 +1,8 @@
-import {getRandomArrayElement} from './util.js';
 import {openBigPicture} from './big-picture.js';
 
 import {debounce, getRandomArrayElement} from './util.js';
 
 const RANDOM_PICTURES_AMOUNT = 10;
-
-
-const RANDOM_PICTURES_AMOUNT = 10;
-
 
 const similarListPictures = document.querySelector('.pictures');
 const similarPictureTemplate = document.querySelector('#picture')
@@ -18,10 +13,6 @@ const defaultFilter = document.querySelector('#filter-default');
 
 const randomFilter = document.querySelector('#filter-random'); //10 случайных, неповторяющихся фотографий.
 const discussedFilter = document.querySelector('#filter-discussed'); // отсортированные в порядке убывания количества комментариев
-
-const randomFilter = document.querySelector('#filter-random'); //10 случайных, не повторяющихся фотографий.
-const discussedFilter = document.querySelector('#filter-discussed'); // отсортированные в порядке убывания количества комментариев
-
 
 const compareComments = (picA, picB) => {
   const commentsA = picA.comments.length;
