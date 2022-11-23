@@ -70,7 +70,6 @@ const setEffect = (evt) => {
   }
 };
 
-
 noUiSlider.create(sliderElement, {
   range: {
     min: 0,

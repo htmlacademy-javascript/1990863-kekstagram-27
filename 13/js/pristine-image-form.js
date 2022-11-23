@@ -1,4 +1,3 @@
-
 import {showSuccessMessage, showErrorMessage} from './upload-messages.js';
 import {standartImg, clearForm} from'./filter.js';
 import {API_URL} from './api-data.js';

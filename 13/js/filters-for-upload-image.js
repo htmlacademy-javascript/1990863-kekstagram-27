@@ -1,6 +1,3 @@
-//изменение масштаба изображения;
-//применение одного из заранее заготовленных эффектов;
-//выбор глубины эффекта с помощью ползунка;
 const DEFAULT_IMAGE = 'img/upload-default-image.jpg';
 
 const STEP_SCALE = 25;
@@ -72,7 +69,6 @@ const setEffect = (evt) => {
     }
   }
 };
-
 
 noUiSlider.create(sliderElement, {
   range: {

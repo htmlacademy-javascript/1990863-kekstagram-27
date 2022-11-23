@@ -1,8 +1,6 @@
 import {API_URL} from './api-data.js';
-
 import {renderSimilarPhotos, initDiscussedFilter, initRandomFilter, initDefaultFilter} from './picture.js';
 import {setUserFormSubmit} from './pristine-image-form.js';
-
 import {modalLoadWindow} from './upload-picture-window.js';
 import {initUploadPicture} from './upload-image.js';
 import {showAlert} from './util.js';

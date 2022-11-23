@@ -16,7 +16,6 @@ function onEscKeyDown(evt) {
   }
 }
 
-
 const showSuccessMessage = () => {
   const successMessage = successTemplate.cloneNode(true);
   const successButton = successMessage.querySelector('.success__button');
