@@ -7,7 +7,6 @@ import {initUploadPicture} from './upload-image.js';
 import {showAlert} from './util.js';
 import {showImgFilters} from './global-filters.js';
 
-
 fetch(`${API_URL}/data`)
   .then((response) => response.json())
   .then((photos) => {
