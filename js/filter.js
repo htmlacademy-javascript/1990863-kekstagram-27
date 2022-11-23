@@ -163,9 +163,12 @@ listEffects.addEventListener('change', setEffect);
 const hashtags = document.querySelector('.text__hashtags');
 const ourComment = document.querySelector('.text__description');
 
-const standartImg = () =>{
-  valueScale.value = `${100}%`;
+const clearForm = () => {
   loadedImg.src = DEFAULT_IMAGE;
+  uploadFile.value = '';
+};
+const standartImg = () => {
+  valueScale.value = `${100}%`;
   loadedImg.style.transform = 'scale(1)';
   loadedImg.className = '';
   loadedImg.classList.add(effectStandart);
@@ -174,7 +177,6 @@ const standartImg = () =>{
   slidervalue.value = '';
   hashtags.value = '';
   ourComment.value = '';
-  uploadFile.value = '';
   sliderElement.classList.add('hidden');
 };
-export {standartImg};
+export {standartImg, clearForm};

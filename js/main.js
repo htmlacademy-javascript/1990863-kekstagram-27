@@ -1,16 +1,23 @@
 import {API_URL} from './api-data.js';
-import {renderSimilarPhotos, initDefaultFilter, initDiscussedFilter, initRandomFilter} from './picture.js';
+import {renderSimilarPhotos, initDiscussedFilter, initRandomFilter, initDefaultFilter} from './picture.js';
 import {setUserFormSubmit} from './pristine-image-form.js';
 import {modalLoadWindow} from './upload-picture-window.js';
-import {debounce} from './util.js';
-
+import {initUploadPicture} from './upload-image.js';
+import {showAlert} from './util.js';
+import {showImgFilters} from './global-filters.js';
 
 fetch(`${API_URL}/data`)
   .then((response) => response.json())
   .then((photos) => {
     renderSimilarPhotos(photos);
-    initDefaultFilter(photos, debounce(() => renderSimilarPhotos(photos)));
-    initDiscussedFilter(photos, debounce((sortedPhotos) => renderSimilarPhotos(sortedPhotos) ));
-    initRandomFilter(photos, debounce((sortedPhotos) => renderSimilarPhotos(sortedPhotos) ));
+
+    showImgFilters();
+    initDefaultFilter(photos, () => renderSimilarPhotos(photos));
+    initDiscussedFilter(photos, (sortedPhotos) => renderSimilarPhotos(sortedPhotos) );
+    initRandomFilter(photos, (sortedPhotos) => renderSimilarPhotos(sortedPhotos) );
+  })
+  .catch(() => {
+    showAlert('Не удалось подключиться к серверу');
   });
+initUploadPicture();
 setUserFormSubmit( modalLoadWindow.closePopup);

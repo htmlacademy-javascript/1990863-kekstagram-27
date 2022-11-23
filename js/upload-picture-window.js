@@ -1,7 +1,7 @@
 import {ModalWindow} from './modal-window.js';
-import {standartImg} from'./filters-for-upload-image.js';
-import './upload-image.js';
+import {standartImg} from'./filter.js';
 import {inputHashtag, inputDescription } from './pristine-image-form.js';
+
 const buttonFile = document.querySelector('.img-upload__control');
 const windowDownload = document.querySelector('.img-upload__overlay');
 const cancelForm = document.querySelector('#upload-cancel');
@@ -12,8 +12,8 @@ buttonFile.addEventListener('click', () => {
   modalLoadWindow.openPopup();
 });
 cancelForm.addEventListener('click', () => {
-  modalLoadWindow.closePopup();
   standartImg();
+  modalLoadWindow.closePopup();
 });
 
 modalLoadWindow.removeEsc(inputHashtag);

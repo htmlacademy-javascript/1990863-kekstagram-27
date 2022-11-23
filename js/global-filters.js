@@ -2,7 +2,6 @@ const imgFiltersContainer = document.querySelector('.img-filters');
 const activeButton = 'img-filters__button--active';
 const filterbuttons = document.querySelectorAll('.img-filters__button');
 
-
 const showImgFilters = () => {
   imgFiltersContainer.classList.remove('img-filters--inactive');
 };
