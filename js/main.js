@@ -1,4 +1,5 @@
 import {API_URL} from './api-data.js';
+
 import {renderSimilarPhotos, initDiscussedFilter, initRandomFilter, initDefaultFilter} from './picture.js';
 import {setUserFormSubmit} from './pristine-image-form.js';
 
@@ -11,6 +12,7 @@ fetch(`${API_URL}/data`)
   .then((response) => response.json())
   .then((photos) => {
     renderSimilarPhotos(photos);
+
     showImgFilters();
     initDefaultFilter(photos, () => renderSimilarPhotos(photos));
     initDiscussedFilter(photos, (sortedPhotos) => renderSimilarPhotos(sortedPhotos) );
@@ -21,4 +23,3 @@ fetch(`${API_URL}/data`)
   });
 initUploadPicture();
 setUserFormSubmit( modalLoadWindow.closePopup);
-
