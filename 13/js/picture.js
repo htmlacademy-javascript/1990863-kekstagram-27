@@ -1,9 +1,8 @@
-
 import {openBigPicture} from './big-picture.js';
+
 import {debounce, getRandomArrayElement} from './util.js';
 
 const RANDOM_PICTURES_AMOUNT = 10;
-
 
 const similarListPictures = document.querySelector('.pictures');
 const similarPictureTemplate = document.querySelector('#picture')
@@ -11,6 +10,7 @@ const similarPictureTemplate = document.querySelector('#picture')
   .querySelector('.picture');
 
 const defaultFilter = document.querySelector('#filter-default');
+
 const randomFilter = document.querySelector('#filter-random'); //10 случайных, неповторяющихся фотографий.
 const discussedFilter = document.querySelector('#filter-discussed'); // отсортированные в порядке убывания количества комментариев
 
@@ -50,7 +50,9 @@ const initRandomFilter = (pictures, cb) => {
     cb(getRandomPhotosArray(pictures));
   });
 };
+
 const renderSimilarPhotos = debounce((similarPicture) => {
+
   const similarListFragment = document.createDocumentFragment();
   similarPicture.forEach(({url, description, likes, comments}) => {
     const pictureElement = similarPictureTemplate.cloneNode(true);
@@ -64,8 +66,9 @@ const renderSimilarPhotos = debounce((similarPicture) => {
   similarListPictures.appendChild(similarListFragment);
   openBigPicture(similarListPictures, similarPicture);
 
+  document.querySelectorAll('.picture').forEach((picture) => {picture.remove()});
   similarListPictures.appendChild(similarListFragment);
   openBigPicture(similarListPictures, similarPicture);
+
 });
 export {renderSimilarPhotos, initDiscussedFilter, initRandomFilter, initDefaultFilter};
-
