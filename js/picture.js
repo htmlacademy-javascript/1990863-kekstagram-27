@@ -72,5 +72,3 @@ const renderSimilarPhotos = debounce((similarPicture) => {
 
 });
 export {renderSimilarPhotos, initDiscussedFilter, initRandomFilter, initDefaultFilter};
-
-
