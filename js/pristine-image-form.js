@@ -1,5 +1,5 @@
 import {showSuccessMessage, showErrorMessage} from './upload-messages.js';
-import {standartImg, clearForm} from'./filter.js';
+import {returnStandartImg, clearForm} from'./filter.js';
 import {API_URL} from './api-data.js';
 
 const MIN_HASHTAG_LENGTH = 2;
@@ -35,12 +35,12 @@ const validateHashtag = (hashtagArray) => {
   return (numberHashtags <= MAX_HASHTAGS) && isAllTagsUnique && isAllTagsValid;
 };
 
-function isHashtagValidate (value) {
+const isHashtagValidate = (value) => {
   if(value !== '') {
     const hashtagList = value.split(' ');
     return (validateHashtag(hashtagList) && value.length >= MIN_HASHTAG_LENGTH);
   } return true;
-}
+};
 
 pristine.addValidator(
   inputHashtag,
@@ -48,15 +48,15 @@ pristine.addValidator(
   `Хештеги должны начинаться с символа # и от ${MIN_HASHTAG_LENGTH - 1} символа, должны быть уникальны, написаны через пробел и не более 5 хештегов`
 );
 
-function onHashtagsChange () {
+const onHashtagsChange = () => {
   pristine.validate(inputHashtag);
-}
+};
 
 inputHashtag.addEventListener('input', onHashtagsChange);
 
-function validateDescription (value) {
-  return value.length <= MAX_COMMENT_LENGTH;
-}
+const validateDescription = (value) => (
+  (value.length <= MAX_COMMENT_LENGTH)
+);
 
 pristine.addValidator(
   inputDescription,
@@ -82,7 +82,7 @@ const setUserFormSubmit = (onSuccess) => {
           if (response.ok) {
             onSuccess();
             showSuccessMessage();
-            standartImg();
+            returnStandartImg();
             clearForm();
           } else {
             showErrorMessage();

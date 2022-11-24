@@ -8,18 +8,18 @@ function ModalWindow(popupWindow) {
     return evt;
   };
 
-  this.openPopup = function() {
+  this.openPopup = () => {
     popupWindow.classList.remove('hidden');
     document.querySelector('body').classList.add('modal-open');
     document.addEventListener('keydown', onPopupEscKeydown);
   };
-  this.closePopup = function() {
+  this.closePopup = () => {
     popupWindow.classList.add('hidden');
     document.querySelector('body').classList.remove('modal-open');
     document.removeEventListener('keydown', onPopupEscKeydown);
   };
 
-  this.removeEsc = function(onFocusInput){
+  this.removeEsc = (onFocusInput) => {
     onFocusInput.onfocus = () => {
       document.removeEventListener('keydown', onPopupEscKeydown);
     };
@@ -28,7 +28,7 @@ function ModalWindow(popupWindow) {
     };
   };
 
-  this.onEscDeleteEvent = function(callback, fromWindow, thisFunction) {
+  this.onEscDeleteEvent = (callback, fromWindow, thisFunction) => {
     document.addEventListener('keydown', (evt) => {
       if (isEscapeKey(evt)) {
         fromWindow.removeEventListener(callback, thisFunction);

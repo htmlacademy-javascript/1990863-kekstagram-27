@@ -20,12 +20,12 @@ const compareComments = (picA, picB) => {
 
   return commentsB - commentsA;
 };
-const initDefaultFilter = (pictures, cb) => {
+const applyDefaultFilter = (pictures, cb) => {
   defaultFilter.addEventListener('click', () => {
     cb(pictures);
   });
 };
-const initDiscussedFilter = (pictures, cb) => {
+const applyDiscussedFilter = (pictures, cb) => {
   discussedFilter.addEventListener('click', () => {
     const sortedData = pictures.slice().sort(compareComments);
     cb(sortedData);
@@ -45,7 +45,7 @@ const getRandomPhotosArray = (pictures) => {
   return newArray;
 };
 
-const initRandomFilter = (pictures, cb) => {
+const applyRandomFilter = (pictures, cb) => {
   randomFilter.addEventListener('click', () => {
     cb(getRandomPhotosArray(pictures));
   });
@@ -66,9 +66,5 @@ const renderSimilarPhotos = debounce((similarPicture) => {
   similarListPictures.appendChild(similarListFragment);
   openBigPicture(similarListPictures, similarPicture);
 
-  document.querySelectorAll('.picture').forEach((picture) => {picture.remove();});
-  similarListPictures.appendChild(similarListFragment);
-  openBigPicture(similarListPictures, similarPicture);
-
 });
-export {renderSimilarPhotos, initDiscussedFilter, initRandomFilter, initDefaultFilter};
+export {renderSimilarPhotos, applyDiscussedFilter, applyRandomFilter, applyDefaultFilter};

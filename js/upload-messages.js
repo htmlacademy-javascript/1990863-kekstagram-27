@@ -9,11 +9,17 @@ const errorTemplate = document.querySelector('#error')
 
 const body = document.querySelector('body');
 
-function onEscKeyDown(evt) {
+const onEscKeyDown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     hideMessage();
   }
+};
+
+function hideMessage(){
+  const messageElement = document.querySelector('.success') || document.querySelector('.error');
+  messageElement.remove();
+  document.removeEventListener('keydown', onEscKeyDown);
 }
 
 const showSuccessMessage = () => {
@@ -34,9 +40,4 @@ const showErrorMessage = () => {
   body.append(errorMessage);
 };
 
-function hideMessage () {
-  const messageElement = document.querySelector('.success') || document.querySelector('.error');
-  messageElement.remove();
-  document.removeEventListener('keydown', onEscKeyDown);
-}
 export {showSuccessMessage, showErrorMessage};
