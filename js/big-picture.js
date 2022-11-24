@@ -8,6 +8,8 @@ const modalBigPicture = new ModalWindow(bigPicture);
 const commentCountBlock = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 
+const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
+
 const createComment = (src, message, name) => {
   const comment = document.createElement('li');
   comment.classList.add('social__comment');
@@ -47,7 +49,6 @@ const openBigPicture = (pictures, fullInfoPictures) => {
 
       modalBigPicture.openPopup();
       // внутренности катртинки
-      const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
       bigPictureImg.src = url;
       bigPictureImg.alt = description;
       bigPicture.querySelector('.likes-count').textContent = likes;

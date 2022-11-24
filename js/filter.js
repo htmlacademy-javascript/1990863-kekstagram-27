@@ -10,36 +10,6 @@ const valueScale = document.querySelector('.scale__control--value');
 const uploadFile = document.querySelector('#upload-file');
 const loadedImg = document.querySelector('.img-upload__preview img');
 
-const changeScale = (evt) => {
-  if(evt.target === smallerScale || evt.target === biggerScale) {
-    let scale = +valueScale.value.replace(/%/, '');
-
-    if(evt.target === smallerScale){
-      scale = smallerScaleImg(scale);
-    }else if (evt.target === biggerScale) {
-      scale = biggerScaleImg(scale);
-    }
-    loadedImg.style.transform = `scale(${scale / 100})`;
-    valueScale.value = `${scale}%`;
-  }
-};
-
-function smallerScaleImg(scale) {
-  const reduceScale = scale - STEP_SCALE;
-  if(reduceScale >= MIN_SCALE) {
-    return (reduceScale);
-  } return scale;
-}
-
-function biggerScaleImg(scale) {
-  const increaseScale = Number(scale) + Number(STEP_SCALE);
-  if(increaseScale <= MAX_SCALE) {
-    return (increaseScale);
-  } return scale;
-}
-
-scalePanel.addEventListener('click', changeScale);
-
 const listEffects = document.querySelector('.effects__list');
 const effectsItem = listEffects.querySelectorAll('.effects__item');
 const radioEffect = '.effects__radio';
@@ -49,24 +19,34 @@ const effectStandart = `${effectPreview}none`;
 const sliderElement = document.querySelector('.effect-level__slider');
 const slidervalue = document.querySelector('.effect-level__value');
 
-const setEffect = (evt) => {
-  const effectTargetItem = evt.target.closest('.effects__item');
-  if(effectTargetItem) {
-    effectsItem.forEach((item) => {
-      item.querySelector(radioEffect).checked = false;
-    });
-    effectTargetItem.querySelector(radioEffect).checked = true;
-    const effectTarget = effectTargetItem.querySelector(radioEffect).value;
-    loadedImg.className = '';
-    loadedImg.classList.add(effectPreview + effectTarget);
-    if(effectTarget === 'none'){
-      sliderElement.classList.add('hidden');
-      loadedImg.style.filter = '';
-      slidervalue.value = '';
-    } else {
-      sliderElement.classList.remove('hidden');
-      changeSlider(evt, effectTarget);
+const hashtags = document.querySelector('.text__hashtags');
+const ourComment = document.querySelector('.text__description');
+
+const decreaseScaleImg = (scale) => {
+  const reduceScale = scale - STEP_SCALE;
+  if(reduceScale >= MIN_SCALE) {
+    return (reduceScale);
+  } return scale;
+};
+
+const increaseScaleImg = (scale) => {
+  const increaseScale = Number(scale) + Number(STEP_SCALE);
+  if(increaseScale <= MAX_SCALE) {
+    return (increaseScale);
+  } return scale;
+};
+
+const changeScale = (evt) => {
+  if(evt.target === smallerScale || evt.target === biggerScale) {
+    let scale = +valueScale.value.replace(/%/, '');
+
+    if(evt.target === smallerScale){
+      scale = decreaseScaleImg(scale);
+    }else if (evt.target === biggerScale) {
+      scale = increaseScaleImg(scale);
     }
+    loadedImg.style.transform = `scale(${scale / 100})`;
+    valueScale.value = `${scale}%`;
   }
 };
 
@@ -95,7 +75,7 @@ const changeFilter = (currentFilter, setValue, valueType) => {
   loadedImg.style.filter = `${currentFilter}(${setValue + valueType})`;
 };
 
-function changeSlider(evt, valueEffect) {
+const changeSlider = (evt, valueEffect) => {
   let currentFilter = '';
   let valueType;
   if (valueEffect === 'chrome' || valueEffect === 'sepia') {
@@ -156,18 +136,34 @@ function changeSlider(evt, valueEffect) {
     slidervalue.value = valueSlider;
     changeFilter(currentFilter, valueSlider, valueType);
   });
-}
+};
 
-listEffects.addEventListener('change', setEffect);
-
-const hashtags = document.querySelector('.text__hashtags');
-const ourComment = document.querySelector('.text__description');
+const setEffect = (evt) => {
+  const effectTargetItem = evt.target.closest('.effects__item');
+  if(effectTargetItem) {
+    effectsItem.forEach((item) => {
+      item.querySelector(radioEffect).checked = false;
+    });
+    effectTargetItem.querySelector(radioEffect).checked = true;
+    const effectTarget = effectTargetItem.querySelector(radioEffect).value;
+    loadedImg.className = '';
+    loadedImg.classList.add(effectPreview + effectTarget);
+    if(effectTarget === 'none'){
+      sliderElement.classList.add('hidden');
+      loadedImg.style.filter = '';
+      slidervalue.value = '';
+    } else {
+      sliderElement.classList.remove('hidden');
+      changeSlider(evt, effectTarget);
+    }
+  }
+};
 
 const clearForm = () => {
   loadedImg.src = DEFAULT_IMAGE;
   uploadFile.value = '';
 };
-const standartImg = () => {
+const returnStandartImg = () => {
   valueScale.value = `${100}%`;
   loadedImg.style.transform = 'scale(1)';
   loadedImg.className = '';
@@ -179,4 +175,5 @@ const standartImg = () => {
   ourComment.value = '';
   sliderElement.classList.add('hidden');
 };
-export {standartImg, clearForm};
+
+export {returnStandartImg, clearForm, listEffects, setEffect, scalePanel, changeScale};
