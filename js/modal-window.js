@@ -37,5 +37,4 @@ function ModalWindow(popupWindow) {
   };
 }
 
-
 export {ModalWindow};
