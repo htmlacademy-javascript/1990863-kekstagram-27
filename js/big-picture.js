@@ -37,9 +37,9 @@ const countNubmerComment = () => {
   };
 };
 
-const openBigPicture = (pictures, fullInfoPictures) => {
-  pictures.addEventListener('click', (evt) => {
 
+const openBigPicture = (pictures, fullInfoPictures) => {
+  const showBigPicturesForm = (evt) => {
     const pictureTarget = evt.target.closest(picture);
     const arrayPictures = Array.from(pictures.querySelectorAll(picture));
 
@@ -85,7 +85,6 @@ const openBigPicture = (pictures, fullInfoPictures) => {
         const currentNubmerComments = nubmerComments();
         const restOfComment = comments.length - currentNubmerComments;
         const nextNumberComment = currentNubmerComments + NUMBER_OF_COMMENT;
-
         const getNextComment = (beforeNumber) => {
           for(let i = currentNubmerComments; i < beforeNumber; i++){
             if(comments[i]){
@@ -111,7 +110,9 @@ const openBigPicture = (pictures, fullInfoPictures) => {
         commentsLoader.removeEventListener('click', createNextComments);
       });
       modalBigPicture.onEscDeleteEvent('click', commentsLoader, createNextComments);
+
     }
-  });
+  };
+  pictures.addEventListener('click', showBigPicturesForm);
 };
 export {openBigPicture};
